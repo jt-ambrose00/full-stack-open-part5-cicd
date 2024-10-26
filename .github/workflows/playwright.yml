@@ -28,8 +28,6 @@ jobs:
     - name: Install Playwright Browsers
       working-directory: ./bloglist-tests
       run: npx playwright install --with-deps
-    - name: Wait for backend to start
-      run: sleep 10
     - name: Run Playwright tests
       working-directory: ./bloglist-tests
       run: npm test
