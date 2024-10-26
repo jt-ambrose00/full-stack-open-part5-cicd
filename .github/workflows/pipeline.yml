@@ -25,7 +25,7 @@ jobs:
         run: npm install
       - name: Check frontend style
         working-directory: ./bloglist-frontend
-        run: npm run eslint
+        run: npm run lint
       - name: Build frontend
         working-directory: ./bloglist-frontend
         run: npm run build
