@@ -20,12 +20,12 @@ jobs:
     - name: Install dependencies
       working-directory: ./bloglist-tests
       run: npm ci
-    - name: Install Playwright Browsers
-      working-directory: ./bloglist-tests
-      run: npx playwright install --with-deps
     - name: Install frontend dependencies
       working-directory: ./bloglist-frontend
       run: npm install
+    - name: Install Playwright Browsers
+      working-directory: ./bloglist-tests
+      run: npx playwright install --with-deps
     - name: Run Playwright tests
       working-directory: ./bloglist-tests
       run: npm test
