@@ -74,7 +74,7 @@ module.exports = defineConfig({
   webServer: {
     command: 'npm install && npm run dev & cd ../bloglist-frontend && npm install && npm run dev',
     url: 'http://localhost:5173',
-    timeout: 40 * 1000,
+    timeout: 60 * 1000,
     reuseExistingServer: !process.env.CI,
   },
 })
