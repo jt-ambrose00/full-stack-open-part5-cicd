@@ -72,9 +72,9 @@ module.exports = defineConfig({
 
   /* Run your local dev server before starting the tests */
   webServer: {
-    command: 'cd ../bloglist-frontend && npm install && npm run dev && cd .. && npm install && npm run dev',
+    command: 'npm install && npm run dev & cd ../bloglist-frontend && npm install && npm run dev',
     url: 'http://localhost:5173',
-    timeout: 30 * 1000,
+    timeout: 40 * 1000,
     reuseExistingServer: !process.env.CI,
   },
 })
