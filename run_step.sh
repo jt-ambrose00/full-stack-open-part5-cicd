@@ -7,4 +7,4 @@ npm run start &
 
 # run frontend
 cd bloglist-frontend
-npm run preview &
+npm run preview

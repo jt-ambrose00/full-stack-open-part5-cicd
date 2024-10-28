@@ -11,6 +11,9 @@ export default defineConfig({
         changeOrigin: true,
       },
     },
+    server: {
+      port: process.env.PORT ? parseInt(process.env.PORT) : 4173,
+    },
   },
   test: {
     environment: 'jsdom',
