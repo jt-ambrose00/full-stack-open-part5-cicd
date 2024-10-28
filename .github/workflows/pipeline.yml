@@ -16,39 +16,45 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
+
       - name: Install backend dependencies
         run: npm install
+
       - name: Test backend
         run: npm test
+
       - name: Install frontend dependencies
         working-directory: ./bloglist-frontend
         run: npm install
+
       - name: Check frontend style
         working-directory: ./bloglist-frontend
         run: npm run lint
+
       - name: Build frontend
         working-directory: ./bloglist-frontend
         run: npm run build
+
       - name: Trigger deployment
         if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message, ' '), '#skip') }}
         run: curl https://api.render.com/deploy/srv-${{ secrets.RENDER_SERVICE_ID }}?key=${{ secrets.RENDER_API_KEY }}
 
-      # - name: Discord success notification
-      #   uses: stegzilla/discord-notify@v4
-      #   if: success()
-      #   with:
-      #     webhook_url: ${{ secrets.DISCORD_WEBHOOK }}
-      #     colour: '#00FF00'
-      #     title: "A new version of Pokedex deployed"
-      #     message: "to [full-stack-open-pokedex](https://full-stack-open-pokedex-1diy.onrender.com) by ${{ github.actor }}"
-      # - name: Discord failure notification
-      #   uses: stegzilla/discord-notify@v4
-      #   if: failure()
-      #   with:
-      #     webhook_url: ${{ secrets.DISCORD_WEBHOOK }}
-      #     colour: '#FF0000'
-      #     title: "Build failed"
-      #     message: "commit [${{ github.event.head_commit.id }}](${{ github.event.head_commit.url }}) by ${{ github.actor }} broke the build"
+      - name: Discord success notification
+        uses: stegzilla/discord-notify@v4
+        if: success()
+        with:
+          webhook_url: ${{ secrets.DISCORD_WEBHOOK }}
+          colour: '#00FF00'
+          title: "A new version of Pokedex deployed"
+          message: "to [full-stack-open-pokedex](https://full-stack-open-pokedex-1diy.onrender.com) by ${{ github.actor }}"
+      - name: Discord failure notification
+        uses: stegzilla/discord-notify@v4
+        if: failure()
+        with:
+          webhook_url: ${{ secrets.DISCORD_WEBHOOK }}
+          colour: '#FF0000'
+          title: "Build failed"
+          message: "commit [${{ github.event.head_commit.id }}](${{ github.event.head_commit.url }}) by ${{ github.actor }} broke the build"
 
   tag_release:
     needs: [simple_deployment_pipeline]
