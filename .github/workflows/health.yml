@@ -18,6 +18,6 @@ jobs:
     - name: Check the health of the URL
       uses: jtalk/url-health-check-action@v4
       with:
-        url: https://full-stack-open-part5-cicd.onrender.com
+        url: https://full-stack-open-part5-cicd.onrender.com/health
         max-attempts: 2
         retry-delay: 5s

@@ -34,7 +34,7 @@ jobs:
         run: curl https://api.render.com/deploy/srv-${{ secrets.RENDER_SERVICE_ID }}?key=${{ secrets.RENDER_API_KEY }}
       - name: Discord success notification
         uses: stegzilla/discord-notify@v4
-        if: success()
+        if: success() && github.event_name == 'push'
         with:
           webhook_url: ${{ secrets.DISCORD_WEBHOOK }}
           colour: '#00FF00'
@@ -42,7 +42,7 @@ jobs:
           message: "to [full-stack-open-part5-cicd](https://full-stack-open-part5-cicd.onrender.com/) by ${{ github.actor }}"
       - name: Discord failure notification
         uses: stegzilla/discord-notify@v4
-        if: failure()
+        if: failure() && github.event_name == 'push'
         with:
           webhook_url: ${{ secrets.DISCORD_WEBHOOK }}
           colour: '#FF0000'
